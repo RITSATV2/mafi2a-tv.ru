@@ -1,1 +1,100 @@
-# mafi2a-tv.ru
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+</head>
+<body>
+    <style type="text/css">
+        body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+		
+        overflow: hidden;
+        }
+        html,body{
+            margin:0;padding:0;width:100%;height:100%;
+        }
+		html > div[style]{
+   display: none !important;
+}
+  #myImage {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 1s ease-out;
+        }
+        #spinner {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            margin: -25px 0 0 -25px;
+            border: 6px solid #fff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            z-index: 10000;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+<body>		
+	<img id="myImage" src="https://ritsatv.ru/files/picture/original/1730644999920-mafi2atv-baner.webp" alt="mafi2atv" />
+    <div id="spinner"></div>
+    <div id="player"></div>
+
+    <script>
+        const image = document.getElementById("myImage");
+        const spinner = document.getElementById("spinner");
+
+        // Показываем изображение и спиннер
+        image.style.display = "block";
+        spinner.style.display = "block";
+
+        setTimeout(() => {
+            image.style.opacity = 0;
+            spinner.style.opacity = 0;
+
+            setTimeout(() => {
+                image.style.display = "none";
+                spinner.style.display = "none";
+            }, 1900); 
+        }, 2200);
+    </script>
+	
+
+   <script src='https://ritsatv.ru/PLAYER/playerjs19KINOZAL.js' type='text/javascript'></script>    
+    <div id="player" style="width:100%;height:100%;"></div>
+ <script type="text/javascript">
+    var ps = location.href.substr(location.href.indexOf("html?")+5).split("&");
+    var vs = { id: "player", file: "[240p]https://ritsatv.ru/vlive2/mafi2atv/240,[360p]https://ritsatv.ru/vlive2/mafi2atv/360,[480p]https://ritsatv.ru/vlive2/mafi2atv/480,[720p]https://ritsatv.ru/vlive2/mafi2atv/720,[1080p]https://ritsatv.ru/vlive2/mafi2atv/1080",poster:"" };
+    for (var i = 0; i < ps.length; i++) {
+      var p = ps[i].substr(0, ps[i].indexOf("="));
+      var v = ps[i].substr(ps[i].indexOf("=") + 1);
+      if (p != v) {
+        vs[p] = decodeURIComponent(v);
+      }
+    }
+    if (vs.file) {
+      var player = new Playerjs(vs);
+    }
+  </script>
+</body>
+	
+
+
+</html>
+
+ 
