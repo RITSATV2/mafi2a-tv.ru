@@ -7,6 +7,16 @@
 <script async src="https://yandex.ru/ads/system/context.js"></script>
 <script async src="https://cdn.digitalcaramel.com/caramel.js"></script>
 
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XB1B54HQL6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XB1B54HQL6');
+</script>
+	
 <!-- Yandex.Metrika informer -->
 <a href="https://metrika.yandex.ru/stat/?id=69131398&amp;from=informer"
 target="_blank" rel="nofollow"><img src="https://informer.yandex.ru/informer/69131398/3_0_000000FF_000000FF_1_pageviews"
@@ -27,21 +37,8 @@ style="width:0px; height:0px; border:0;" alt="Яндекс.Метрика" title
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/69131398" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XB1B54HQL6"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-XB1B54HQL6');
-</script>
-
-
-
+	
 <title>TV12 GUDAUTA</title>
-
 <style>
 body {
     margin: 0;
@@ -138,7 +135,7 @@ footer {
     }
 }
 
-/* ===== НОВЫЙ БЛОК РЕКЛАМЫ ===== */
+/* ===== РЕКЛАМНЫЙ БЛОК (только десктоп) ===== */
 div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
     position: fixed;
     right: 0;
@@ -147,10 +144,15 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
     width: 300px;
     height: 600px;
     z-index: 9999;
-    /* фон на случай, если реклама не загрузится сразу */
     background: rgba(0,0,0,0.2);
-    /* можно добавить тень для наглядности */
     box-shadow: -4px 0 20px rgba(0,0,0,0.6);
+}
+
+/* Скрываем на мобильных и планшетах (ширина < 1024px) */
+@media (max-width: 1023px) {
+    div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
+        display: none !important;
+    }
 }
 </style>
 </head>
@@ -245,13 +247,11 @@ initPlayer();
 <!-- Существующий блок рекламы внизу (оставлен) -->
 <div caramel-id="01jra58xvph4jdqa4xvdktwt7h"></div>
 
-<!-- НОВЫЙ БЛОК – всегда справа, поверх всего, размер 300×600 -->
+<!-- НОВЫЙ БЛОК – только для десктопа (скрывается на мобильных) -->
 <div caramel-id="01jra5czeryzkjyeyka9a2ze0b"></div>
 
 </body>
 </html>
-	
-
 
 
 
