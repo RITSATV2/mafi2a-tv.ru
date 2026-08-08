@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>window.yaContextCb = window.yaContextCb || [] </script> 
+<script>window.yaContextCb = window.yaContextCb || []</script> 
 <script async src="https://yandex.ru/ads/system/context.js"></script>
 <script async src="https://cdn.digitalcaramel.com/caramel.js"></script>
 	
@@ -42,7 +42,7 @@ header h1 {
     max-width: 900px;
     margin: 30px auto;
     padding: 0 15px;
-	box-shadow: 0 24px 60px rgba(0, 0, 0, .8), 0 0 0 1px rgba(255, 255, 255, .04);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .8), 0 0 0 1px rgba(255, 255, 255, .04);
 }
 
 .player-box {
@@ -51,7 +51,6 @@ header h1 {
     background: #000;
     border-radius: 12px;
     overflow: hidden;
-
     box-shadow: 0 24px 60px rgba(0, 0, 0, .8), 
                 0 0 0 1px rgba(255, 255, 255, .04);
 }
@@ -105,6 +104,21 @@ footer {
         width: 70px;
     }
 }
+
+/* ===== НОВЫЙ БЛОК РЕКЛАМЫ ===== */
+div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 300px;
+    height: 600px;
+    z-index: 9999;
+    /* фон на случай, если реклама не загрузится сразу */
+    background: rgba(0,0,0,0.2);
+    /* можно добавить тень для наглядности */
+    box-shadow: -4px 0 20px rgba(0,0,0,0.6);
+}
 </style>
 </head>
 
@@ -133,7 +147,7 @@ footer {
         <div class="channel" onclick="setChannel(2,this)">
             <img src="https://ritsatv.ru//files/poster/original/901235.webp">
         </div>
-		<div class="channel" onclick="setChannel(3,this)">
+        <div class="channel" onclick="setChannel(3,this)">
             <img src="https://ritsatv.ru//files/poster/original/600601.webp">
         </div>
     </div>
@@ -169,7 +183,7 @@ const channels = [
     file: "https://ritsatv.ru/rutlive/muztv/1080",
     title: "МУЗ ТВ",
     poster: "https://ritsatv.ru//files/poster/original/600601"
-}	
+}    
 ];
 
 function initPlayer(channelIndex = 0) {
@@ -194,8 +208,13 @@ function setChannel(index, el) {
 
 initPlayer();
 </script>
+
+<!-- Существующий блок рекламы внизу (оставлен) -->
+<div caramel-id="01jra58xvph4jdqa4xvdktwt7h"></div>
+
+<!-- НОВЫЙ БЛОК – всегда справа, поверх всего, размер 300×600 -->
 <div caramel-id="01jra5czeryzkjyeyka9a2ze0b"></div>
-<div caramel-id="01jra58xvph4jdqa4xvdktwt7h"></div>	
+
 </body>
 </html>
 	
