@@ -171,6 +171,7 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
     </div>
 
     <div class="channels">
+        <!-- Существующие каналы (индексы 0–3) -->
         <div class="channel active" onclick="setChannel(0,this)">
             <img src="https://mafi2a-tv.ru/posters/900776.webp">
         </div>
@@ -182,8 +183,34 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
         <div class="channel" onclick="setChannel(2,this)">
             <img src="https://ritsatv.ru//files/poster/original/901235.webp">
         </div>
+
         <div class="channel" onclick="setChannel(3,this)">
             <img src="https://ritsatv.ru//files/poster/original/600601.webp">
+        </div>
+
+        <!-- Новые каналы (индексы 4–9) -->
+        <div class="channel" onclick="setChannel(4,this)">
+            <img src="https://mafi2a-tv.ru/posters/901378.webp">
+        </div>
+
+        <div class="channel" onclick="setChannel(5,this)">
+            <img src="https://mafi2a-tv.ru/posters/901260.webp">
+        </div>
+
+        <div class="channel" onclick="setChannel(6,this)">
+            <img src="https://mafi2a-tv.ru/posters/100000001.webp">
+        </div>
+
+        <div class="channel" onclick="setChannel(7,this)">
+            <img src="https://mafi2a-tv.ru/posters/901497.webp">
+        </div>
+
+        <div class="channel" onclick="setChannel(8,this)">
+            <img src="https://mafi2a-tv.ru/posters/700828.webp">
+        </div>
+
+        <div class="channel" onclick="setChannel(9,this)">
+            <img src="https://mafi2a-tv.ru/posters/901382.webp">
         </div>
     </div>
 
@@ -199,26 +226,59 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
 let player;
 
 const channels = [
-{
-    file: "[240p]https://ritsatv.ru/vlive2/mafi2atv/240,[360p]https://ritsatv.ru/vlive2/mafi2atv/360,[480p]https://ritsatv.ru/vlive2/mafi2atv/480,[720p]https://ritsatv.ru/vlive2/mafi2atv/720,[1080p]https://ritsatv.ru/vlive2/mafi2atv/1080",
-    title: "TV12 GUDAUTA",
-    poster: "https://mafi2a-tv.ru/posters/900776"
-},
-{
-    file: "https://amg01131-tracetv-tracelatina-glewed-vtnk7.amagi.tv/playlist1080P.m3u8",
-    title: "TRACE LATINA",
-    poster: "https://ritsatv.ru//files/poster/original/901573"
-},
-{
-    file: "https://amg01131-tracetv-amg01131c5-plex-us-4388.playouts.now.amagi.tv/playlist1080p.m3u8",
-    title: "TRACE UK",
-    poster: "https://ritsatv.ru//files/poster/original/901235"
-},
-{
-    file: "https://ritsatv.ru/rutlive/muztv/1080",
-    title: "МУЗ ТВ",
-    poster: "https://ritsatv.ru//files/poster/original/600601"
-}    
+    // Существующие (индексы 0–3)
+    {
+        file: "[240p]https://ritsatv.ru/vlive2/mafi2atv/240,[360p]https://ritsatv.ru/vlive2/mafi2atv/360,[480p]https://ritsatv.ru/vlive2/mafi2atv/480,[720p]https://ritsatv.ru/vlive2/mafi2atv/720,[1080p]https://ritsatv.ru/vlive2/mafi2atv/1080",
+        title: "TV12 GUDAUTA",
+        poster: "https://mafi2a-tv.ru/posters/900776"
+    },
+    {
+        file: "https://amg01131-tracetv-tracelatina-glewed-vtnk7.amagi.tv/playlist1080P.m3u8",
+        title: "TRACE LATINA",
+        poster: "https://ritsatv.ru//files/poster/original/901573"
+    },
+    {
+        file: "https://amg01131-tracetv-amg01131c5-plex-us-4388.playouts.now.amagi.tv/playlist1080p.m3u8",
+        title: "TRACE UK",
+        poster: "https://ritsatv.ru//files/poster/original/901235"
+    },
+    {
+        file: "https://ritsatv.ru/rutlive/muztv/1080",
+        title: "МУЗ ТВ",
+        poster: "https://ritsatv.ru//files/poster/original/600601"
+    },
+
+    // Новые каналы (индексы 4–9)
+    {
+        file: "https://kinowalk.hopto.org/scripachtv_live",
+        title: "СКРИПАЧ ТВ",
+        poster: "https://mafi2a-tv.ru/posters/901378.webp"
+    },
+    {
+        file: "https://kinowalk.hopto.org/selecaotv_live",
+        title: "SELECAO TV",
+        poster: "https://mafi2a-tv.ru/posters/901260.webp"
+    },
+    {
+        file: "https://kinowalk.hopto.org/vhs-forever_live",
+        title: "VHS FOREVER",
+        poster: "https://mafi2a-tv.ru/posters/100000001.webp"
+    },
+    {
+        file: "https://kinowalk.hopto.org/yurich_kinomix_live",
+        title: "KINOMIX",
+        poster: "https://mafi2a-tv.ru/posters/901497.webp"
+    },
+    {
+        file: "https://s.catcast.tv/content/39533/index.m3u8?token=256912513557b168d0d4f6867d29b81c",
+        title: "ФАНТАСТИКА",
+        poster: "https://mafi2a-tv.ru/posters/700828.webp"
+    },
+    {
+        file: "https://ritsatv.ru/rutlive/skytennis",
+        title: "SKY SPORTS TENNIS",
+        poster: "https://mafi2a-tv.ru/posters/901382.webp"
+    }
 ];
 
 function initPlayer(channelIndex = 0) {
@@ -252,7 +312,3 @@ initPlayer();
 
 </body>
 </html>
-
-
-
- 
