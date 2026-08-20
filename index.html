@@ -46,6 +46,13 @@ body {
     font-family: Arial, sans-serif;
     background: #0a0b12;
     color: #fff;
+	overflow-y: scroll; /* включает прокрутку */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE и Edge */
+}
+	body::-webkit-scrollbar {
+    width: 0; /* Chrome, Safari, Opera */
+    height: 0;
 }
 
 /* HEADER */
