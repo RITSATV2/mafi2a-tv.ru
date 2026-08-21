@@ -130,7 +130,7 @@
         div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
             position: fixed;
             left: 10px;
-            top: 40%;
+            top: 50%;
             transform: translateY(-50%);
             width: 350px;
             height: 600px;
