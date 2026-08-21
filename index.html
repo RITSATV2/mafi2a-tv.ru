@@ -118,10 +118,10 @@
         }
         .channel:hover {
             transform: scale(1.05);
-            border-color: #00000000;
+            border-color: #00000000;  /* полностью прозрачная граница при наведении */
         }
         .channel.active {
-            border-color: #673ab791;
+            border-color: #673ab791;  /* фиолетовый с полупрозрачностью */
         }
         .channel img {
             width: 100%;
@@ -151,12 +151,12 @@
             header span {
                 font-size: 16px;
             }
-             body {
+            body {
                 height: 2000px;
             }
             .channels {
-            gap: 1px;
-            margin-top: 10px;
+                gap: 1px;
+                margin-top: 10px;
             }
             .channel {
                 width: 58px;
@@ -349,6 +349,12 @@
             // Меняем URL без перезагрузки
             const newPath = '/' + slugs[index];
             history.pushState({ channelIndex: index }, '', newPath);
+
+            // ---------- ПЛАВНЫЙ СКРОЛЛ К ПЛЕЕРУ ----------
+            const container = document.querySelector('.container');
+            if (container) {
+                container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         // ---------- Переключение без изменения URL (для popstate) ----------
@@ -358,38 +364,36 @@
             document.querySelectorAll('.channel').forEach(c => c.classList.remove('active'));
             el.classList.add('active');
             initPlayer(index);
-        }
-(function handleRedirect() {
-    // Проверяем, был ли мы перенаправлены из 404.html
-    const redirectPath = sessionStorage.redirect;
-    if (redirectPath) {
-        // Очищаем сохраненный путь, чтобы он не сработал снова при обновлении
-        delete sessionStorage.redirect;
-
-        // Извлекаем slug из пути (убираем ведущий слеш)
-        const slug = redirectPath.replace(/^\/+/, '');
-        const index = slugs.indexOf(slug);
-        if (index !== -1) {
-            // Если slug найден, переключаем канал и обновляем URL без перезагрузки
-            const el = document.querySelector(`.channel[data-slug="${slugs[index]}"]`);
-            if (el) {
-                setChannel(index, el);
-                // Заменяем историю, чтобы в адресной строке был правильный путь
-                history.replaceState({ channelIndex: index }, '', redirectPath);
+            // Скролл при навигации назад/вперёд
+            const container = document.querySelector('.container');
+            if (container) {
+                container.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
-    }
-})();
+
+        (function handleRedirect() {
+            const redirectPath = sessionStorage.redirect;
+            if (redirectPath) {
+                delete sessionStorage.redirect;
+                const slug = redirectPath.replace(/^\/+/, '');
+                const index = slugs.indexOf(slug);
+                if (index !== -1) {
+                    const el = document.querySelector(`.channel[data-slug="${slugs[index]}"]`);
+                    if (el) {
+                        setChannel(index, el);
+                        history.replaceState({ channelIndex: index }, '', redirectPath);
+                    }
+                }
+            }
+        })();
 
         // ---------- Восстановление состояния при загрузке страницы ----------
         function restoreFromURL() {
-            const path = window.location.pathname; // например, "/tv12_gudauta"
-            // Убираем ведущий слеш и ищем в слагах
+            const path = window.location.pathname; 
             const slug = path.replace(/^\/+/, ''); 
             let index = slugs.indexOf(slug);
-            if (index === -1) index = 0; // если не найден, берём первый
+            if (index === -1) index = 0;
 
-            // Находим элемент с таким data-slug и активируем
             const el = document.querySelector(`.channel[data-slug="${slugs[index]}"]`);
             if (el) {
                 document.querySelectorAll('.channel').forEach(c => c.classList.remove('active'));
@@ -397,10 +401,15 @@
             }
             initPlayer(index);
 
-            // Если URL не соответствует текущему слагу (например, пришёл "/"), заменяем на правильный без создания лишней записи
             const correctPath = '/' + slugs[index];
             if (path !== correctPath) {
                 history.replaceState({ channelIndex: index }, '', correctPath);
+            }
+
+            // ---------- ПЛАВНЫЙ СКРОЛЛ К ПЛЕЕРУ ПРИ ЗАГРУЗКЕ ----------
+            const container = document.querySelector('.container');
+            if (container) {
+                container.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
@@ -409,7 +418,6 @@
             if (event.state && event.state.channelIndex !== undefined) {
                 switchToChannel(event.state.channelIndex);
             } else {
-                // Если state отсутствует (например, переход с другого сайта), восстанавливаем по URL
                 restoreFromURL();
             }
         });
