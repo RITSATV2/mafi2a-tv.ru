@@ -1,1 +1,15 @@
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Перенаправление...</title>
+    <script>
+      // Сохраняем запрошенный путь и перенаправляем на index.html
+      sessionStorage.redirect = location.pathname;
+      location.replace('/');
+    </script>
+  </head>
+  <body>
+    <h1>Перенаправление...</h1>
+  </body>
+</html>
