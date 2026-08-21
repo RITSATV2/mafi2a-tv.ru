@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Смотреть ТВ онлайн бесплатно: TV12 GUDAUTA, СКРИПАЧ ТВ, TRACE LATINA и другие</title>
-    <meta name="description" content="Смотрите прямой эфир телеканалов в высоком качестве: TV12 GUDAUTA, СКРИПАЧ ТВ, TRACE LATINA, МУЗ ТВ, KINOMIX, VHS FOREVER, SKY SPORTS TENNIS и другие. Бесплатно, без регистрации.">
+    <meta name="description" content="Смотрите прямой эфир телеканалов в высоком качестве: TV12 GUDAUTA, СКРИПАЧ ТВ, TRACE LATINA, МУЗ ТВ, KINOMIX, VHS FOREVER, SKY SPORTS TENNIS, SETANTA, MEGAHIT, BOLLYWOOD и другие. Бесплатно, без регистрации.">
     
     <!-- Яндекс.Реклама и метрики -->
     <script>window.yaContextCb = window.yaContextCb || []</script> 
@@ -118,10 +118,10 @@
         }
         .channel:hover {
             transform: scale(1.05);
-            border-color: #00000000;  /* полностью прозрачная граница при наведении */
+            border-color: #00000000;
         }
         .channel.active {
-            border-color: #673ab791;  /* фиолетовый с полупрозрачностью */
+            border-color: #673ab791;
         }
         .channel img {
             width: 100%;
@@ -202,7 +202,7 @@
         <h2 class="visually-hidden">Выберите канал:</h2>
 
         <div class="channels">
-            <!-- Каналы с data-slug атрибутами -->
+            <!-- Существующие каналы 0–9 -->
             <div class="channel active" data-slug="tv12_gudauta" onclick="setChannel(0,this)">
                 <img src="https://mafi2a-tv.ru/posters/900776.webp" alt="TV12 GUDAUTA">
                 <span class="channel-name">TV12 GUDAUTA</span>
@@ -243,6 +243,48 @@
                 <img src="https://mafi2a-tv.ru/posters/901382.webp" alt="SKY SPORTS TENNIS">
                 <span class="channel-name">SKY SPORTS TENNIS</span>
             </div>
+
+            <!-- НОВЫЕ КАНАЛЫ (индексы 10–19) -->
+            <div class="channel" data-slug="setanta1" onclick="setChannel(10,this)">
+                <img src="https://mafi2a-tv.ru/posters/900982.webp" alt="SETANTA 1">
+                <span class="channel-name">SETANTA 1</span>
+            </div>
+            <div class="channel" data-slug="setanta2" onclick="setChannel(11,this)">
+                <img src="https://mafi2a-tv.ru/posters/900983.webp" alt="SETANTA 2">
+                <span class="channel-name">SETANTA 2</span>
+            </div>
+            <div class="channel" data-slug="setantakz" onclick="setChannel(12,this)">
+                <img src="https://mafi2a-tv.ru/posters/900118.webp" alt="SETANTA KZ">
+                <span class="channel-name">SETANTA KZ</span>
+            </div>
+            <div class="channel" data-slug="megahit" onclick="setChannel(13,this)">
+                <img src="https://mafi2a-tv.ru/posters/600111.webp" alt="MEGAHIT">
+                <span class="channel-name">MEGAHIT</span>
+            </div>
+            <div class="channel" data-slug="shokiruyushchee" onclick="setChannel(14,this)">
+                <img src="https://mafi2a-tv.ru/posters/901042.webp" alt="ШОКИРУЮЩЕЕ">
+                <span class="channel-name">ШОКИРУЮЩЕЕ</span>
+            </div>
+            <div class="channel" data-slug="kinozal2" onclick="setChannel(15,this)">
+                <img src="https://mafi2a-tv.ru/posters/901562.webp" alt="КИНОЗАЛ 2">
+                <span class="channel-name">КИНОЗАЛ 2</span>
+            </div>
+            <div class="channel" data-slug="kinozal3" onclick="setChannel(16,this)">
+                <img src="https://mafi2a-tv.ru/posters/901563.webp" alt="КИНОЗАЛ 3">
+                <span class="channel-name">КИНОЗАЛ 3</span>
+            </div>
+            <div class="channel" data-slug="kinozal4" onclick="setChannel(17,this)">
+                <img src="https://mafi2a-tv.ru/posters/901564.webp" alt="КИНОЗАЛ 4">
+                <span class="channel-name">КИНОЗАЛ 4</span>
+            </div>
+            <div class="channel" data-slug="kinozal5" onclick="setChannel(18,this)">
+                <img src="https://mafi2a-tv.ru/posters/901565.webp" alt="КИНОЗАЛ 5">
+                <span class="channel-name">КИНОЗАЛ 5</span>
+            </div>
+            <div class="channel" data-slug="bollywood" onclick="setChannel(19,this)">
+                <img src="https://mafi2a-tv.ru/posters/900182.webp" alt="BOLLYWOOD">
+                <span class="channel-name">BOLLYWOOD</span>
+            </div>
         </div>
     </div>
 
@@ -253,8 +295,9 @@
     <script src='https://mafi2a-tv.ru/player/playerjs.js'></script>
 
     <script>
-        // ---------- Данные каналов ----------
+        // ---------- Данные каналов (20 каналов) ----------
         const channels = [
+            // 0–9 существующие
             {
                 file: "[240p]https://ritsatv.ru/vlive2/mafi2atv/240,[360p]https://ritsatv.ru/vlive2/mafi2atv/360,[480p]https://ritsatv.ru/vlive2/mafi2atv/480,[720p]https://ritsatv.ru/vlive2/mafi2atv/720,[1080p]https://ritsatv.ru/vlive2/mafi2atv/1080",
                 title: "TV12 GUDAUTA",
@@ -304,10 +347,61 @@
                 file: "https://ritsatv.ru/rutlive/skytennis",
                 title: "SKY SPORTS TENNIS",
                 poster: "https://mafi2a-tv.ru/posters/901382.webp"
+            },
+            // 10–19 новые
+            {
+                file: "https://ritsatv.ru/stream/000004498/tve/index.m3u8",
+                title: "SETANTA 1",
+                poster: "https://mafi2a-tv.ru/posters/900982.webp"
+            },
+            {
+                file: "https://ritsatv.ru/stream/000004499/tve/index.m3u8",
+                title: "SETANTA 2",
+                poster: "https://mafi2a-tv.ru/posters/900983.webp"
+            },
+            {
+                file: "https://ritsatv.ru/stream/000002649/tve/index.m3u8",
+                title: "SETANTA KZ",
+                poster: "https://mafi2a-tv.ru/posters/900118.webp"
+            },
+            {
+                file: "https://ritsatv.ru/stream/000000869/tve/index.m3u8",
+                title: "MEGAHIT",
+                poster: "https://mafi2a-tv.ru/posters/600111.webp"
+            },
+            {
+                file: "https://cors.campware.io/stream.mcquack.net/75/index.m3u8",
+                title: "ШОКИРУЮЩЕЕ",
+                poster: "https://mafi2a-tv.ru/posters/901042.webp"
+            },
+            {
+                file: "https://cors.campware.io/stream.mcquack.net/265/index.m3u8",
+                title: "КИНОЗАЛ 2",
+                poster: "https://mafi2a-tv.ru/posters/901562.webp"
+            },
+            {
+                file: "https://cors.campware.io/stream.mcquack.net/171/index.m3u8",
+                title: "КИНОЗАЛ 3",
+                poster: "https://mafi2a-tv.ru/posters/901563.webp"
+            },
+            {
+                file: "https://cors.campware.io/stream.mcquack.net/126/index.m3u8",
+                title: "КИНОЗАЛ 4",
+                poster: "https://mafi2a-tv.ru/posters/901564.webp"
+            },
+            {
+                file: "https://cors.campware.io/stream.mcquack.net/265/index.m3u8",
+                title: "КИНОЗАЛ 5",
+                poster: "https://mafi2a-tv.ru/posters/901565.webp"
+            },
+            {
+                file: "https://ritsatv.ru/stream/000001419/tve/index.m3u8",
+                title: "BOLLYWOOD",
+                poster: "https://mafi2a-tv.ru/posters/900182.webp"
             }
         ];
 
-        // ---------- Сопоставление slug ↔ индекс ----------
+        // ---------- Сопоставление slug ↔ индекс (20 слагов) ----------
         const slugs = [
             'tv12_gudauta',
             'trace_latina',
@@ -318,7 +412,17 @@
             'vhs_forever',
             'kinomix',
             'fantastika',
-            'sky_sports_tennis'
+            'sky_sports_tennis',
+            'setanta1',
+            'setanta2',
+            'setantakz',
+            'megahit',
+            'shokiruyushchee',
+            'kinozal2',
+            'kinozal3',
+            'kinozal4',
+            'kinozal5',
+            'bollywood'
         ];
 
         let player;
@@ -339,18 +443,12 @@
 
         // ---------- Переключение канала (вызывается по клику) ----------
         function setChannel(index, el) {
-            // Обновляем активный класс
             document.querySelectorAll('.channel').forEach(c => c.classList.remove('active'));
             el.classList.add('active');
-
-            // Запускаем плеер
             initPlayer(index);
-
-            // Меняем URL без перезагрузки
             const newPath = '/' + slugs[index];
             history.pushState({ channelIndex: index }, '', newPath);
-
-            // ---------- ПЛАВНЫЙ СКРОЛЛ К HEADER (чтобы он был виден) ----------
+            // Плавный скролл к header
             const header = document.querySelector('header');
             if (header) {
                 header.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -364,7 +462,6 @@
             document.querySelectorAll('.channel').forEach(c => c.classList.remove('active'));
             el.classList.add('active');
             initPlayer(index);
-            // Скролл к header при навигации назад/вперёд
             const header = document.querySelector('header');
             if (header) {
                 header.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -406,7 +503,6 @@
                 history.replaceState({ channelIndex: index }, '', correctPath);
             }
 
-            // ---------- ПЛАВНЫЙ СКРОЛЛ К HEADER ПРИ ЗАГРУЗКЕ ----------
             const header = document.querySelector('header');
             if (header) {
                 header.scrollIntoView({ behavior: 'smooth', block: 'start' });
