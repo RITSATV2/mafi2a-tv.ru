@@ -128,11 +128,11 @@
         }
 
         div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
-            position: fixed;
-            right: 0;
-            top: 50%;
+           position: fixed;
+            left: 10px;
+            top: 40%;
             transform: translateY(-50%);
-            width: 300px;
+            width: 350px;
             height: 600px;
             z-index: 9999;
             background: rgba(0,0,0,0.2);
