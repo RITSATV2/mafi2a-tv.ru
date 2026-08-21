@@ -6,7 +6,7 @@
     <title>Смотреть ТВ онлайн бесплатно: TV12 GUDAUTA, СКРИПАЧ ТВ, TRACE LATINA и другие</title>
     <meta name="description" content="Смотрите прямой эфир телеканалов в высоком качестве: TV12 GUDAUTA, СКРИПАЧ ТВ, TRACE LATINA, МУЗ ТВ, KINOMIX, VHS FOREVER, SKY SPORTS TENNIS и другие. Бесплатно, без регистрации.">
     
-    <!-- Яндекс.Реклама и метрики (оставляем как есть) -->
+    <!-- Яндекс.Реклама и метрики -->
     <script>window.yaContextCb = window.yaContextCb || []</script> 
     <script async src="https://yandex.ru/ads/system/context.js"></script>
     <script async src="https://cdn.digitalcaramel.com/caramel.js"></script>
@@ -350,10 +350,10 @@
             const newPath = '/' + slugs[index];
             history.pushState({ channelIndex: index }, '', newPath);
 
-            // ---------- ПЛАВНЫЙ СКРОЛЛ К ПЛЕЕРУ ----------
-            const container = document.querySelector('.container');
-            if (container) {
-                container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // ---------- ПЛАВНЫЙ СКРОЛЛ К HEADER (чтобы он был виден) ----------
+            const header = document.querySelector('header');
+            if (header) {
+                header.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
@@ -364,10 +364,10 @@
             document.querySelectorAll('.channel').forEach(c => c.classList.remove('active'));
             el.classList.add('active');
             initPlayer(index);
-            // Скролл при навигации назад/вперёд
-            const container = document.querySelector('.container');
-            if (container) {
-                container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Скролл к header при навигации назад/вперёд
+            const header = document.querySelector('header');
+            if (header) {
+                header.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
@@ -406,10 +406,10 @@
                 history.replaceState({ channelIndex: index }, '', correctPath);
             }
 
-            // ---------- ПЛАВНЫЙ СКРОЛЛ К ПЛЕЕРУ ПРИ ЗАГРУЗКЕ ----------
-            const container = document.querySelector('.container');
-            if (container) {
-                container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // ---------- ПЛАВНЫЙ СКРОЛЛ К HEADER ПРИ ЗАГРУЗКЕ ----------
+            const header = document.querySelector('header');
+            if (header) {
+                header.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
