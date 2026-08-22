@@ -2,10 +2,11 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            height: 1280;
             background: #0a0b12;
             color: #fff;
             overflow-y: auto;
-            scrollbar-width: none;
+            scrollbar-width: auto;
             -ms-overflow-style: none;
         }
         body::-webkit-scrollbar {
@@ -132,7 +133,7 @@
             left: 10px;
             top: 50%;
             transform: translateY(-50%);
-            width: 350px;
+            width: 310px;
             height: 600px;
             z-index: 9999;
             background: rgba(0,0,0,0.2);
