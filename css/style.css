@@ -161,11 +161,20 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
     padding: 15px;
     box-sizing: border-box;
     transition: transform 0.3s ease;
-    /* При скрытом состоянии панель уезжает вправо на свою ширину + отступ */
-    transform: translateX(calc(100% + 20px));
     scrollbar-width: thin;
     scrollbar-color: #673ab791 transparent;
 }
+
+/* Базовое состояние – скрыто (уехало вправо с учётом отступа) */
+#epg-panel {
+    transform: translateX(calc(100% + 20px));
+}
+
+/* Открытое состояние – на месте */
+#epg-panel.open {
+    transform: translateX(0) !important;
+}
+
 #epg-panel::-webkit-scrollbar {
     width: 6px;
 }
@@ -173,12 +182,9 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
     background: #673ab791;
     border-radius: 8px;
 }
-#epg-panel.open {
-    transform: translateX(0) !important;  /* принудительно возвращаем на место */
-}
 
 #epg-panel .epg-close {
-    display: none;  /* на десктопе не нужна, на мобильных покажем */
+    display: none; /* на десктопе не нужна, покажем на мобильных */
 }
 
 .epg-toggle {
@@ -305,7 +311,8 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
         height: 100%;
         padding: 10px;
         border-left: 1px solid #333;
-        transform: translateX(100%);  /* на мобильных уезжает полностью за экран */
+        /* На мобильных отступов нет – уезжаем на 100% ширины */
+        transform: translateX(100%);
     }
     #epg-panel.open {
         transform: translateX(0) !important;
@@ -337,5 +344,6 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
     .epg-toggle {
         display: inline-block;
     }
-    /* Панель по умолчанию открыта (класс open добавляется через JS) */
+    /* Панель по умолчанию открыта – класс open добавляется через JS */
+    /* В CSS не задаём начальное состояние, чтобы управлять через класс */
 }
