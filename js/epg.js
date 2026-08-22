@@ -1,4 +1,7 @@
 // epg.js — универсальный загрузчик и рендерер EPG
+// Поддерживает:
+// - числовые ID (загружает с epg.pw)
+// - полные URL на XML-файлы (любой источник)
 
 function parseXMLTime(str) {
     const d = str.split(' ')[0];
@@ -93,15 +96,26 @@ function renderSchedule(programs, now) {
     return html || 'Нет программы на сегодня и завтра';
 }
 
-function loadEPG(channelId, container) {
-    if (!channelId) {
+function loadEPG(epgId, container) {
+    // Если epgId пустой, null или undefined — показываем сообщение
+    if (!epgId) {
         container.innerHTML = '<div class="no-current">Нет EPG для этого канала</div>';
         return;
     }
-    const url = `https://epg.pw/api/epg.xml?lang=en&channel_id=${channelId}`;
+
+    // Определяем, является ли epgId готовым URL
+    let url;
+    if (epgId.startsWith('http://') || epgId.startsWith('https://')) {
+        // Это готовый URL — используем как есть
+        url = epgId;
+    } else {
+        // Это числовой ID — собираем URL для epg.pw
+        url = `https://epg.pw/api/epg.xml?lang=en&channel_id=${epgId}`;
+    }
+
     fetch(url)
         .then(res => {
-            if (!res.ok) throw new Error('Ошибка загрузки EPG');
+            if (!res.ok) throw new Error(`Ошибка загрузки EPG: ${res.status}`);
             return res.text();
         })
         .then(text => {
