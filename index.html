@@ -55,12 +55,17 @@
     
     <link rel="icon" href="https://mafi2a-tv.ru/favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="https://mafi2a-tv.ru/favicon.ico">
+
+    <!-- Подключаем скрипт EPG -->
+    <script src="https://mafi2a-tv.ru/js/epg.js" defer></script>
 </head>
 <body>
 
     <header>
         <img src="https://ritsatv.ru//files/poster/original/900776.webp" alt="TV12 GUDAUTA">
         <span>MAFI2A-TV</span>
+        <!-- Кнопка EPG (показывается только на мобильных) -->
+        <button class="epg-toggle" id="epgToggle">📺 EPG</button>
     </header>
 
     <div class="container">
@@ -73,7 +78,7 @@
         <h2 class="visually-hidden">Выберите канал:</h2>
 
         <div class="channels">
-            <!-- Существующие каналы 0–9 -->
+            <!-- Каналы 0–9 -->
             <div class="channel active" data-slug="tv12_gudauta" onclick="setChannel(0,this)">
                 <img src="https://mafi2a-tv.ru/posters/900776.webp" alt="TV12 GUDAUTA">
                 <span class="channel-name">TV12 GUDAUTA</span>
@@ -115,7 +120,7 @@
                 <span class="channel-name">SKY SPORTS TENNIS</span>
             </div>
 
-            <!-- НОВЫЕ КАНАЛЫ (индексы 10–19) -->
+            <!-- Каналы 10–19 с EPG -->
             <div class="channel" data-slug="setanta1" onclick="setChannel(10,this)">
                 <img src="https://mafi2a-tv.ru/posters/900982.webp" alt="SETANTA 1">
                 <span class="channel-name">SETANTA 1</span>
@@ -163,116 +168,141 @@
         © 2026  
     </footer>
 
-    <script src='https://mafi2a-tv.ru/player/playerjs.js'></script>
+    <!-- Панель EPG -->
+    <div id="epg-panel">
+        <button class="epg-close" id="epgClose">✕</button>
+        <div id="epg-content">Загрузка программы…</div>
+    </div>
 
+    <script src='https://mafi2a-tv.ru/player/playerjs.js'></script>
     <script>
-        // ---------- Данные каналов (20 каналов) ----------
+        // ---------- Данные каналов (20 каналов) с epgId ----------
         const channels = [
-            // 0–9 существующие
+            // 0–9 без EPG
             {
                 file: "https://ritsatv.ru/vlive2/mafi2atv/1080",
                 title: "TV12 GUDAUTA",
-                poster: "https://mafi2a-tv.ru/posters/900776.webp"
+                poster: "https://mafi2a-tv.ru/posters/900776.webp",
+                epgId: null
             },
             {
                 file: "https://amg01131-tracetv-tracelatina-glewed-vtnk7.amagi.tv/playlist1080P.m3u8",
                 title: "TRACE LATINA",
-                poster: "https://mafi2a-tv.ru/posters/901573.webp"
+                poster: "https://mafi2a-tv.ru/posters/901573.webp",
+                epgId: null
             },
             {
                 file: "https://amg01131-tracetv-amg01131c5-plex-us-4388.playouts.now.amagi.tv/playlist1080p.m3u8",
                 title: "TRACE UK",
-                poster: "https://mafi2a-tv.ru/posters/901235.webp"
+                poster: "https://mafi2a-tv.ru/posters/901235.webp",
+                epgId: null
             },
             {
                 file: "https://ritsatv.ru/rutlive/muztv/1080",
                 title: "МУЗ ТВ",
-                poster: "https://mafi2a-tv.ru/posters/600601.webp"
+                poster: "https://mafi2a-tv.ru/posters/600601.webp",
+                epgId: null
             },
             {
                 file: "https://kinowalk.hopto.org/scripachtv_live",
                 title: "СКРИПАЧ ТВ",
-                poster: "https://mafi2a-tv.ru/posters/901378.webp"
+                poster: "https://mafi2a-tv.ru/posters/901378.webp",
+                epgId: null
             },
             {
                 file: "https://kinowalk.hopto.org/selecaotv_live",
                 title: "SELECAO TV",
-                poster: "https://mafi2a-tv.ru/posters/901260.webp"
+                poster: "https://mafi2a-tv.ru/posters/901260.webp",
+                epgId: null
             },
             {
                 file: "https://kinowalk.hopto.org/vhs-forever_live",
                 title: "VHS FOREVER",
-                poster: "https://mafi2a-tv.ru/posters/100000001.webp"
+                poster: "https://mafi2a-tv.ru/posters/100000001.webp",
+                epgId: null
             },
             {
                 file: "https://kinowalk.hopto.org/yurich_kinomix_live",
                 title: "KINOMIX",
-                poster: "https://mafi2a-tv.ru/posters/901497.webp"
+                poster: "https://mafi2a-tv.ru/posters/901497.webp",
+                epgId: null
             },
             {
                 file: "https://s.catcast.tv/content/39533/index.m3u8?token=256912513557b168d0d4f6867d29b81c",
                 title: "ФАНТАСТИКА",
-                poster: "https://mafi2a-tv.ru/posters/700828.webp"
+                poster: "https://mafi2a-tv.ru/posters/700828.webp",
+                epgId: null
             },
             {
                 file: "https://ritsatv.ru/rutlive/skytennis",
                 title: "SKY SPORTS TENNIS",
-                poster: "https://mafi2a-tv.ru/posters/901382.webp"
+                poster: "https://mafi2a-tv.ru/posters/901382.webp",
+                epgId: null
             },
-            // 10–19 новые
+            // 10–19 с EPG
             {
                 file: "https://ritsatv.ru/stream/000004498/tve/index.m3u8",
                 title: "SETANTA 1",
-                poster: "https://mafi2a-tv.ru/posters/900982.webp"
+                poster: "https://mafi2a-tv.ru/posters/900982.webp",
+                epgId: "247795"
             },
             {
                 file: "https://ritsatv.ru/stream/000004499/tve/index.m3u8",
                 title: "SETANTA 2",
-                poster: "https://mafi2a-tv.ru/posters/900983.webp"
+                poster: "https://mafi2a-tv.ru/posters/900983.webp",
+                epgId: "325011"
             },
             {
                 file: "https://ritsatv.ru/stream/000002649/tve/index.m3u8",
                 title: "SETANTA KZ",
-                poster: "https://mafi2a-tv.ru/posters/900118.webp"
+                poster: "https://mafi2a-tv.ru/posters/900118.webp",
+                epgId: "6159"
             },
             {
                 file: "https://ritsatv.ru/stream/000000869/tve/index.m3u8",
                 title: "MEGAHIT",
-                poster: "https://mafi2a-tv.ru/posters/600111.webp"
+                poster: "https://mafi2a-tv.ru/posters/600111.webp",
+                epgId: null
             },
             {
                 file: "https://cors.campware.io/stream.mcquack.net/75/index.m3u8",
                 title: "ШОКИРУЮЩЕЕ",
-                poster: "https://mafi2a-tv.ru/posters/901042.webp"
+                poster: "https://mafi2a-tv.ru/posters/901042.webp",
+                epgId: null
             },
             {
                 file: "https://cors.campware.io/stream.mcquack.net/265/index.m3u8",
                 title: "КИНОЗАЛ 2",
-                poster: "https://mafi2a-tv.ru/posters/901562.webp"
+                poster: "https://mafi2a-tv.ru/posters/901562.webp",
+                epgId: null
             },
             {
                 file: "https://cors.campware.io/stream.mcquack.net/171/index.m3u8",
                 title: "КИНОЗАЛ 3",
-                poster: "https://mafi2a-tv.ru/posters/901563.webp"
+                poster: "https://mafi2a-tv.ru/posters/901563.webp",
+                epgId: null
             },
             {
                 file: "https://cors.campware.io/stream.mcquack.net/126/index.m3u8",
                 title: "КИНОЗАЛ 4",
-                poster: "https://mafi2a-tv.ru/posters/901564.webp"
+                poster: "https://mafi2a-tv.ru/posters/901564.webp",
+                epgId: null
             },
             {
                 file: "https://cors.campware.io/stream.mcquack.net/265/index.m3u8",
                 title: "КИНОЗАЛ 5",
-                poster: "https://mafi2a-tv.ru/posters/901565.webp"
+                poster: "https://mafi2a-tv.ru/posters/901565.webp",
+                epgId: null
             },
             {
                 file: "https://ritsatv.ru/stream/000001419/tve/index.m3u8",
                 title: "BOLLYWOOD",
-                poster: "https://mafi2a-tv.ru/posters/900182.webp"
+                poster: "https://mafi2a-tv.ru/posters/900182.webp",
+                epgId: null
             }
         ];
 
-        // ---------- Сопоставление slug ↔ индекс (20 слагов) ----------
+        // ---------- Сопоставление slug ↔ индекс ----------
         const slugs = [
             'tv12_gudauta',
             'trace_latina',
@@ -312,14 +342,23 @@
             });
         }
 
+        // ---------- Обновление EPG ----------
+        function updateEPG(index) {
+            const epgId = channels[index].epgId;
+            const container = document.getElementById('epg-content');
+            if (container) {
+                loadEPG(epgId, container);
+            }
+        }
+
         // ---------- Переключение канала (вызывается по клику) ----------
         function setChannel(index, el) {
             document.querySelectorAll('.channel').forEach(c => c.classList.remove('active'));
             el.classList.add('active');
             initPlayer(index);
+            updateEPG(index);
             const newPath = '/' + slugs[index];
             history.pushState({ channelIndex: index }, '', newPath);
-            // Плавный скролл к header
             const header = document.querySelector('header');
             if (header) {
                 header.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -333,6 +372,7 @@
             document.querySelectorAll('.channel').forEach(c => c.classList.remove('active'));
             el.classList.add('active');
             initPlayer(index);
+            updateEPG(index);
             const header = document.querySelector('header');
             if (header) {
                 header.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -368,6 +408,7 @@
                 el.classList.add('active');
             }
             initPlayer(index);
+            updateEPG(index);
 
             const correctPath = '/' + slugs[index];
             if (path !== correctPath) {
@@ -389,10 +430,58 @@
             }
         });
 
+        // ---------- Управление панелью EPG ----------
+        document.addEventListener('DOMContentLoaded', function() {
+            const panel = document.getElementById('epg-panel');
+            const toggleBtn = document.getElementById('epgToggle');
+            const closeBtn = document.getElementById('epgClose');
+
+            // На десктопе открыто, на мобильных закрыто
+            if (window.innerWidth > 1023) {
+                panel.classList.add('open');
+            } else {
+                panel.classList.remove('open');
+            }
+
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', function() {
+                    panel.classList.toggle('open');
+                });
+            }
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    panel.classList.remove('open');
+                });
+            }
+        });
+
         // ---------- Запуск при загрузке ----------
         window.addEventListener('DOMContentLoaded', restoreFromURL);
     </script>
-<script id="chatBroEmbedCode">/* Chatbro Widget Embed Code Start */function ChatbroLoader(chats,async){async=!1!==async;var params={embedChatsParameters:chats instanceof Array?chats:[chats],lang:navigator.language||navigator.userLanguage,needLoadCode:'undefined'==typeof Chatbro,embedParamsVersion:localStorage.embedParamsVersion,chatbroScriptVersion:localStorage.chatbroScriptVersion},xhr=new XMLHttpRequest;xhr.withCredentials=!0,xhr.onload=function(){eval(xhr.responseText)},xhr.onerror=function(){console.error('Chatbro loading error')},xhr.open('GET','https://www.chatbro.com/embed.js?'+btoa(unescape(encodeURIComponent(JSON.stringify(params)))),async),xhr.send()}/* Chatbro Widget Embed Code End */ChatbroLoader({encodedChatId: '291js'});</script>
+
+    <!-- Чат (ChatBro) -->
+    <script id="chatBroEmbedCode">
+        /* Chatbro Widget Embed Code Start */
+        function ChatbroLoader(chats, async) {
+            async = !1 !== async;
+            var params = {
+                embedChatsParameters: chats instanceof Array ? chats : [chats],
+                lang: navigator.language || navigator.userLanguage,
+                needLoadCode: 'undefined' == typeof Chatbro,
+                embedParamsVersion: localStorage.embedParamsVersion,
+                chatbroScriptVersion: localStorage.chatbroScriptVersion
+            },
+            xhr = new XMLHttpRequest;
+            xhr.withCredentials = !0,
+            xhr.onload = function() { eval(xhr.responseText) },
+            xhr.onerror = function() { console.error('Chatbro loading error') },
+            xhr.open('GET', 'https://www.chatbro.com/embed.js?' + btoa(unescape(encodeURIComponent(JSON.stringify(params)))), async),
+            xhr.send()
+        }
+        /* Chatbro Widget Embed Code End */
+        ChatbroLoader({ encodedChatId: '291js' });
+    </script>
+
     <!-- Реклама -->
     <div caramel-id="01jra58xvph4jdqa4xvdktwt7h"></div>
     <div caramel-id="01jra5czeryzkjyeyka9a2ze0b"></div>
