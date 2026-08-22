@@ -146,7 +146,7 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
     }
 }
 
-/* Стили для EPG */
+/* ===== Стили для EPG ===== */
 #epg-panel {
     position: fixed;
     top: 0;
@@ -294,7 +294,7 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
     100% { opacity: 1; }
 }
 
-/* Адаптация для мобильных */
+/* ===== Адаптация для мобильных ===== */
 @media (max-width: 600px) {
     #epg-panel {
         width: 280px;
@@ -321,12 +321,11 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
     }
 }
 
-/* на десктопе панель открыта по умолчанию */
+/* ===== На десктопе панель открыта по умолчанию, кнопка видна ===== */
 @media (min-width: 1024px) {
-    #epg-panel {
-        transform: translateX(0);
-    }
+    /* Панель управляется классом .open, поэтому здесь ничего не меняем */
+    /* Кнопка теперь видна */
     .epg-toggle {
-        display: none;
+        display: inline-block; /* или block, чтобы показывать */
     }
 }
