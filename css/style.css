@@ -1,4 +1,4 @@
-/* Все стили остаются без изменений */
+/* Общие стили */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -161,7 +161,8 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
     padding: 15px;
     box-sizing: border-box;
     transition: transform 0.3s ease;
-    transform: translateX(100%);
+    /* При скрытом состоянии панель уезжает вправо на свою ширину + отступ */
+    transform: translateX(calc(100% + 20px));
     scrollbar-width: thin;
     scrollbar-color: #673ab791 transparent;
 }
@@ -173,10 +174,11 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
     border-radius: 8px;
 }
 #epg-panel.open {
-    transform: translateX(0);
+    transform: translateX(0) !important;  /* принудительно возвращаем на место */
 }
+
 #epg-panel .epg-close {
-    display: none;
+    display: none;  /* на десктопе не нужна, на мобильных покажем */
 }
 
 .epg-toggle {
@@ -297,8 +299,16 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
 /* ===== Адаптация для мобильных ===== */
 @media (max-width: 600px) {
     #epg-panel {
+        top: 0;
+        right: 0;
         width: 280px;
+        height: 100%;
         padding: 10px;
+        border-left: 1px solid #333;
+        transform: translateX(100%);  /* на мобильных уезжает полностью за экран */
+    }
+    #epg-panel.open {
+        transform: translateX(0) !important;
     }
     #epg-panel .epg-close {
         display: block;
@@ -323,9 +333,9 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
 
 /* ===== На десктопе панель открыта по умолчанию, кнопка видна ===== */
 @media (min-width: 1024px) {
-    /* Панель управляется классом .open, поэтому здесь ничего не меняем */
-    /* Кнопка теперь видна */
+    /* Кнопка всегда видна */
     .epg-toggle {
-        display: inline-block; /* или block, чтобы показывать */
+        display: inline-block;
     }
+    /* Панель по умолчанию открыта (класс open добавляется через JS) */
 }
