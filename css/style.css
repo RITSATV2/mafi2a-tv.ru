@@ -149,10 +149,10 @@ div[caramel-id="01jra5czeryzkjyeyka9a2ze0b"] {
 /* ===== Стили для EPG ===== */
 #epg-panel {
     position: fixed;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 100%;
+    top: 100px;
+    right: 20px;
+    width: 320px;
+    height: 650px;
     max-height: 100vh;
     background: #0f111a;
     border-left: 1px solid #333;
